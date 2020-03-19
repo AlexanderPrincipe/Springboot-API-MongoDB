@@ -19,6 +19,4 @@ public interface EmpleadoRepo extends MongoRepository<Empleado, Serializable> {
     @RestResource(path = "codigo",rel = "codigo")
     public List<Empleado> findByCodigoOrderByNombre(@Param("codigo")String codigo, Pageable pageable);
 
-    @RestResource(path = "borrarPorCodigo", rel = "borrarPorCodigo")
-    public long deleteByNombre(@Param("codigo")String nombre);
 }
