@@ -3,8 +3,10 @@ package com.example.demo.Document;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
+
+
 
 @Document(collection = "Empleado")
 public class Empleado implements Serializable {
@@ -21,8 +23,10 @@ public class Empleado implements Serializable {
     
     private String fechaNacimiento;
     
+    @Email(message = "Correo valido")
     private String correo;
     
+    @Size(min=1, max = 2, message="Solo se permite las letras A,B,C y D")
     private String categoria;
     
     private String conocimientos[];
