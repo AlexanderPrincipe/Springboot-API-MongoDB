@@ -17,6 +17,6 @@ import java.util.List;
 public interface EmpleadoRepo extends MongoRepository<Empleado, Serializable> {
 
     @RestResource(path = "codigo",rel = "codigo")
-    public List<Empleado> findByCodigoOrderByNombre(@Param("codigo")String codigo, Pageable pageable);
+    public List<Empleado> findByCodigoOrderByCodigo(@Param("codigo")String codigo, Pageable pageable);
 
 }

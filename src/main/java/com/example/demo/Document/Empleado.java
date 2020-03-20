@@ -1,10 +1,13 @@
 package com.example.demo.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import static java.awt.PageAttributes.MediaType.A;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 
@@ -17,18 +20,22 @@ public class Empleado implements Serializable {
     @NotNull
     private String nombre;
 
+    @NotNull
     private String apellidoPaterno;
     
+    @NotNull
     private String apellidoMaterno;
     
+    @JsonFormat(pattern="yyyy-MM-dd")
     private String fechaNacimiento;
     
-    @Email(message = "Correo valido")
+    @Email(message = "Correo no valido")
     private String correo;
     
-    @Size(min=1, max = 2, message="Solo se permite las letras A,B,C y D")
+    @Pattern(regexp = "[A-D]")
     private String categoria;
     
+    @NotNull
     private String conocimientos[];
 
     public String[] getConocimientos() {
@@ -97,6 +104,26 @@ public class Empleado implements Serializable {
         this.categoria = categoria;
     }
     
- 
+    public int calcularSalario() {
+        int salario = 0;
+        if (null != getCategoria()) switch (getCategoria()) {
+            case "A":
+                salario = (int)(Math.random()*(15000-8000+1)+8000);
+                break;
+            case "B":
+                salario = (int)(Math.random()*(7999-5000+1)+5000);
+                break;
+            case "C":
+                salario = (int)(Math.random()*(4999-3000+1)+3000);
+                break;
+            case "D":
+                salario = (int)(Math.random()*(2999-2000+1)+2000);
+                break;
+            default:
+                break;
+        }
+    
+        return salario;
+    }
  
 }
